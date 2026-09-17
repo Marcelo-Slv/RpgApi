@@ -1,18 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using RpgApi.Enuns;
+using RpgApi.Models.Enuns;
 using RpgApi.Models;
 
 namespace RpgApi.Data
 {
     public class DataContext : DbContext
     {
-
         public DataContext(DbContextOptions<DataContext> options) : base(options) //Cria uma lista de opções e dps passa ela para a base options
         {
             
@@ -42,5 +39,6 @@ namespace RpgApi.Data
             .HaveColumnType("varchar").HaveMaxLength(200);
         }
 
+        
     }
 }

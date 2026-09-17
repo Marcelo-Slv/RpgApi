@@ -1,20 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using RpgApi.Enuns;
 using RpgApi.Models;
+using RpgApi.Models.Enuns;
 
 namespace RpgApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PersonagensExemploController : Controller
+    public class PersonagensExemploController : ControllerBase
     {
-         private static List<Personagem> personagens = new List<Personagem>()
+        private static List<Personagem> personagens = new List<Personagem>()
         {
             //Personagens aqui
             new Personagem() { Id = 1, Nome = "Frodo", PontosVida=100, Forca=17, Defesa=23, Inteligencia=33, Classe=ClasseEnum.Cavaleiro},
@@ -27,10 +25,44 @@ namespace RpgApi.Controllers
         };
 
         [HttpGet("GetAll")]
-
         public IActionResult Get()
         {
             return Ok(personagens);
+        }
+
+        [HttpPost]
+        public IActionResult AddPersonagem(Personagem novoPersonagem)
+        {
+            personagens.Add(novoPersonagem);
+            return Ok(personagens);
+        }
+
+        [HttpPut]
+        public IActionResult UpdatePersonagem(Personagem p)
+        {
+            Personagem personagemAlterado = personagens.Find(pers => pers.Id == p.Id);
+            personagemAlterado.Nome = p.Nome;
+            personagemAlterado.PontosVida = p.PontosVida;
+            personagemAlterado.Forca = p.Forca;
+            personagemAlterado.Defesa = p.Defesa;
+            personagemAlterado.Inteligencia = p.Inteligencia;
+            personagemAlterado.Classe = p.Classe;
+            return Ok(personagens);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            personagens.RemoveAll(pers => pers.Id == id);
+            return Ok(personagens);
+        }
+
+        [HttpGet("GetByEnum/{enumId}")]
+        public IActionResult GetByEnum(int enumId)
+        {
+            ClasseEnum enumDigitado = (ClasseEnum)enumId;
+            List<Personagem> listaBusca = personagens.FindAll(p => p.Classe == enumDigitado);
+            return Ok(listaBusca);
         }
 
     }

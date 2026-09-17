@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RpgApi.Enuns;
+using RpgApi.Models.Enuns;
 
 namespace RpgApi.Models
 {
@@ -21,6 +21,6 @@ namespace RpgApi.Models
 
         public int Inteligencia { get; set;}
 
-        public ClasseEnum Classe { get; internal set; }
+        public ClasseEnum Classe { get; set; }
     }
 }
