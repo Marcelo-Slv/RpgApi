@@ -6,7 +6,15 @@ namespace RpgApi.Enuns
 
         Mago=2,
 
-        Clerigo=3
+        Clerigo=3,
+
+        Fraca=4,
+
+        Media=5,
+
+        Forte=6,
+
+        Secreta=7
         
     }
 }
